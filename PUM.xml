@@ -1,0 +1,534 @@
+<Schema name="PUM Pentaho">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Case Start Date">
+    <Hierarchy visible="true" hasAll="true" primaryKey="date_tk">
+      <Table name="dim_date">
+      </Table>
+      <Level name="Year" visible="true" column="year" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month" ordinalColumn="month" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day_of_month" type="Integer" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+      <Level name="Date" visible="true" column="date_field" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Main Start Date">
+    <Hierarchy visible="true" hasAll="true" primaryKey="date_tk">
+      <Table name="dim_date3">
+      </Table>
+      <Level name="Year" visible="true" column="year" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month" ordinalColumn="month" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day_of_month" type="Integer" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+      <Level name="Date" visible="true" column="date_field" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Case End Date">
+    <Hierarchy visible="true" hasAll="true" primaryKey="date_tk">
+      <Table name="dim_date2">
+      </Table>
+      <Level name="Year" visible="true" column="year" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month" ordinalColumn="month" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day_of_month" type="Integer" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+      <Level name="Date" visible="true" column="date_field" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Main End Date">
+    <Hierarchy visible="true" hasAll="true" primaryKey="date_tk">
+      <Table name="dim_date4">
+      </Table>
+      <Level name="Year" visible="true" column="year" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month" ordinalColumn="month" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day_of_month" type="Integer" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+      <Level name="Date" visible="true" column="date_field" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="MVO Question">
+    <Hierarchy name="Question ID" visible="true" hasAll="true" primaryKey="QuestionIDTK">
+      <Table name="dim_mvo_question">
+      </Table>
+      <Level name="Question ID" visible="true" column="QuestionID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Question" visible="true" hasAll="true" primaryKey="QuestionIDTK">
+      <Table name="dim_mvo_question">
+      </Table>
+      <Level name="Question" visible="true" column="Question" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Webform" visible="true" hasAll="true" primaryKey="QuestionIDTK">
+      <Table name="dim_mvo_question">
+      </Table>
+      <Level name="Webform" visible="true" column="Webform" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="MVO Answer">
+    <Hierarchy name="Answer ID" visible="true" hasAll="true" primaryKey="AnswerIDTK">
+      <Table name="dim_mvo_answer">
+      </Table>
+      <Level name="Answer ID" visible="true" column="AnswerID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Answer" visible="true" hasAll="true" primaryKey="AnswerIDTK">
+      <Table name="dim_mvo_answer">
+      </Table>
+      <Level name="Answer" visible="true" column="Answer" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Contact ID" visible="true" hasAll="true" primaryKey="AnswerIDTK">
+      <Table name="dim_mvo_answer">
+      </Table>
+      <Level name="Contact ID" visible="true" column="ContactID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Contact Name" visible="true" hasAll="true" primaryKey="AnswerIDTK">
+      <Table name="dim_mvo_answer">
+      </Table>
+      <Level name="Contact Name" visible="true" column="ContactName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Activity">
+    <Hierarchy name="Status" visible="true" hasAll="true" primaryKey="ActivityIDTK">
+      <Table name="dim_activity">
+      </Table>
+      <Level name="Status" visible="true" column="ActivityStatus" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Activity Type" visible="true" hasAll="true" primaryKey="ActivityIDTK">
+      <Table name="dim_activity">
+      </Table>
+      <Level name="Activity Type" visible="true" column="ActivityType" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Activity Subject" visible="true" hasAll="true" primaryKey="ActivityIDTK">
+      <Table name="dim_activity">
+      </Table>
+      <Level name="Activity Subject" visible="true" column="ActivitySubject" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Exit Expert Reason" visible="true" hasAll="true" primaryKey="ActivityIDTK">
+      <Table name="dim_activity">
+      </Table>
+      <Level name="Exit Expert Reason" visible="true" column="ExitExpertReden" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Extension" visible="true" hasAll="true" primaryKey="ActivityIDTK">
+      <Table name="dim_activity">
+      </Table>
+      <Level name="Expert Extension" visible="true" column="ExpertExtension" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Extension Reason" visible="true" hasAll="true" primaryKey="ActivityIDTK">
+      <Table name="dim_activity">
+      </Table>
+      <Level name="Expert Extension Reason" visible="true" column="ExpertExtensionReason" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Case Client">
+    <Hierarchy name="Client Name" visible="true" hasAll="true" primaryKey="CaseClientIDTK">
+      <Table name="dim_case_client">
+      </Table>
+      <Level name="Client Name" visible="true" column="ClientName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Client Contact ID" visible="true" hasAll="true" primaryKey="CaseClientIDTK">
+      <Table name="dim_case_client">
+      </Table>
+      <Level name="Client Contact ID" visible="true" column="CaseClientID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Client World Region" visible="true" hasAll="true" primaryKey="CaseClientIDTK">
+      <Table name="dim_case_client">
+      </Table>
+      <Level name="Client World Region" visible="true" column="ClientWorldRegion" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Client Country" visible="true" hasAll="true" primaryKey="CaseClientIDTK">
+      <Table name="dim_case_client">
+      </Table>
+      <Level name="Client Country" visible="true" column="ClientCountry" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Client City" visible="true" hasAll="true" primaryKey="CaseClientIDTK">
+      <Table name="dim_case_client">
+      </Table>
+      <Level name="Client City" visible="true" column="ClientCity" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Client Sector" visible="true" hasAll="true" primaryKey="CaseClientIDTK">
+      <Table name="dim_case_client">
+      </Table>
+      <Level name="Client Sector" visible="true" column="ClientSector" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Legal Form" visible="true" hasAll="true" primaryKey="CaseClientIDTK">
+      <Table name="dim_case_client">
+      </Table>
+      <Level name="Legal Form" visible="true" column="ClientLegalForm" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Operational Model" visible="true" hasAll="true" primaryKey="CaseClientIDTK">
+      <Table name="dim_case_client">
+      </Table>
+      <Level name="Operational Model" visible="true" column="ClientOperationalModel" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Case">
+    <Hierarchy name="Case ID" visible="true" hasAll="true" primaryKey="CaseIDTK">
+      <Table name="dim_case">
+      </Table>
+      <Level name="Case ID" visible="true" column="CaseID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Case Type" visible="true" hasAll="true" primaryKey="CaseIDTK">
+      <Table name="dim_case">
+      </Table>
+      <Level name="Case Type" visible="true" column="CaseType" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Case Status" visible="true" hasAll="true" primaryKey="CaseIDTK">
+      <Table name="dim_case">
+      </Table>
+      <Level name="Case Status" visible="true" column="CaseStatus" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Case Subject" visible="true" hasAll="true" primaryKey="CaseIDTK">
+      <Table name="dim_case">
+      </Table>
+      <Level name="Case Subject" visible="true" column="CaseSubject" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Case PUM Sequence" visible="true" hasAll="true" primaryKey="CaseIDTK">
+      <Table name="dim_case">
+      </Table>
+      <Level name="Case PUM Sequence" visible="true" column="PumCaseSequence" type="Integer" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Case PUM Type" visible="true" hasAll="true" primaryKey="CaseIDTK">
+      <Table name="dim_case">
+      </Table>
+      <Level name="Case PUM Type" visible="true" column="PumCaseType" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Case PUM Country" visible="true" hasAll="true" primaryKey="CaseIDTK">
+      <Table name="dim_case">
+      </Table>
+      <Level name="Case PUM Country" visible="true" column="PumCaseCountry" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Project">
+    <Hierarchy name="Project Name" visible="true" hasAll="true" primaryKey="ProjectIDTK">
+      <Table name="dim_project">
+      </Table>
+      <Level name="Project Name" visible="true" column="ProjectName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Project Manager Name" visible="true" hasAll="true" primaryKey="ProjectIDTK">
+      <Table name="dim_project">
+      </Table>
+      <Level name="Project Manager Name" visible="true" column="ProjectManager" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Project Manager Contact ID" visible="true" hasAll="true" primaryKey="ProjectIDTK">
+      <Table name="dim_project">
+      </Table>
+      <Level name="Project Manager Contact ID" visible="true" column="ProjectManagerID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Representative">
+    <Hierarchy name="Representative Name" visible="true" hasAll="true" primaryKey="RepresentativeIDTK">
+      <Table name="dim_client_representative">
+      </Table>
+      <Level name="Representative" visible="true" column="Representative" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Representative Contact ID" visible="true" hasAll="true" primaryKey="RepresentativeIDTK">
+      <Table name="dim_client_representative">
+      </Table>
+      <Level name="Representative Contact ID" visible="true" column="RepresentativeID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Project Officer">
+    <Hierarchy name="Project Officer Name" visible="true" hasAll="true" primaryKey="ProjectOfficerIDTK">
+      <Table name="dim_country_project_officer">
+      </Table>
+      <Level name="Project Officer" visible="true" column="ProjectOfficer" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Project Officer Contact ID" visible="true" hasAll="true" primaryKey="ProjectOfficerIDTK">
+      <Table name="dim_country_project_officer">
+      </Table>
+      <Level name="Project Officer Contact ID" visible="true" column="ProjectOfficer" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Country Coordinator">
+    <Hierarchy name="Country Coordinator Name" visible="true" hasAll="true" primaryKey="CountryCoordinatorIDTK">
+      <Table name="dim_country_country_coordinator">
+      </Table>
+      <Level name="Country Coordinator Name" visible="true" column="CountryCoordinatorName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Country Coordinator Contact ID" visible="true" hasAll="true" primaryKey="CountryCoordinatorIDTK">
+      <Table name="dim_country_country_coordinator">
+      </Table>
+      <Level name="Country Coordinator Contact ID" visible="true" column="CountryCoordinatorID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Country Coordinator Gender" visible="true" hasAll="true" primaryKey="CountryCoordinatorIDTK">
+      <Table name="dim_country_country_coordinator">
+      </Table>
+      <Level name="Country Coordinator Gender" visible="true" column="CountryCoordinatorGender" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Country Coordinator Birth Date" visible="true" hasAll="true" primaryKey="CountryCoordinatorIDTK">
+      <Table name="dim_country_country_coordinator">
+      </Table>
+      <Level name="Country Coordinator Birth Date" visible="true" column="CountryCoordinatorBirthDate" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Sector Coordinator">
+    <Hierarchy name="Sector Coordinator Name" visible="true" hasAll="true" primaryKey="SectorCoordinatorIDTK">
+      <Table name="dim_client_sector_coordinator">
+      </Table>
+      <Level name="Sector Coordinator Name" visible="true" column="SectorCoordinatorName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Sector Coordinator Contact ID" visible="true" hasAll="true" primaryKey="SectorCoordinatorIDTK">
+      <Table name="dim_client_sector_coordinator">
+      </Table>
+      <Level name="Sector Coordinator Contact ID" visible="true" column="SectorCoordinatorID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Sector Coordinator Gender" visible="true" hasAll="true" primaryKey="SectorCoordinatorIDTK">
+      <Table name="dim_client_sector_coordinator">
+      </Table>
+      <Level name="Sector Coordinator Gender" visible="true" column="SectorCoordinatorGender" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Sector Coordinator Birth Date" visible="true" hasAll="true" primaryKey="SectorCoordinatorIDTK">
+      <Table name="dim_client_sector_coordinator">
+      </Table>
+      <Level name="Sector Coordinator Birth Date" visible="true" column="SectorCoordinatorBirthDate" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Sector Coordinator Of Sector" visible="true" hasAll="true" primaryKey="SectorCoordinatorIDTK">
+      <Table name="dim_client_sector_coordinator">
+      </Table>
+      <Level name="Sector Coordinator Of Sector" visible="true" column="SectorCoordinatorSector" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Expert">
+    <Hierarchy name="Expert Name" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Name" visible="true" column="ExpertName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Short Name" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Short Name" visible="true" column="ExpertShortName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Contact ID" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Contact ID" visible="true" column="ExpertID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Gender" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Gender" visible="true" column="ExpertGender" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Birth Date" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Birth Date" visible="true" column="ExpertBirthDate" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert City" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert City" visible="true" column="ExpertCity" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Post Code" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Post Code" visible="true" column="ExpertPostCode" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Gemeente" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Gemeente" visible="true" column="ExpertGemeente" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Buurt" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Buurt" visible="true" column="ExpertBuurt" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Buurt Code" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Buurt Code" visible="true" column="ExpertBuurtCode" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Main Sector" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Main Sector" visible="true" column="ExpertSector" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Sector Coordinator Name" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Sector Coordinator Name" visible="true" column="ExpertSectorCoordinatorName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Sector Coordinator Contact ID" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Sector Coordinator Contact ID" visible="true" column="ExpertSectorCoordinatorID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Status" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert Status" visible="true" column="ExpertStatus" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert CV In Mutation" visible="true" hasAll="true" primaryKey="ExpertIDTK">
+      <Table name="dim_expert">
+      </Table>
+      <Level name="Expert CV In Mutation" visible="true" column="ExpertCVMutation" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Expert Case">
+    <Hierarchy name="Expert Case Type" visible="true" hasAll="true" primaryKey="ExpertCaseIDTK">
+      <Table name="dim_expert_case">
+      </Table>
+      <Level name="Expert Case Type" visible="true" column="ExpertCaseType" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Case Status" visible="true" hasAll="true" primaryKey="ExpertCaseIDTK">
+      <Table name="dim_expert_case">
+      </Table>
+      <Level name="Expert Case Status" visible="true" column="ExpertCaseStatus" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Case Subject" visible="true" hasAll="true" primaryKey="ExpertCaseIDTK">
+      <Table name="dim_expert_case">
+      </Table>
+      <Level name="Expert Case Subject" visible="true" column="ExpertCaseSubject" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Expert Rejected" visible="true" hasAll="true" primaryKey="ExpertCaseIDTK">
+      <Table name="dim_expert_case">
+      </Table>
+      <Level name="Expert Rejected" visible="true" column="ExpertCaseExpertReject" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Sponsor">
+    <Hierarchy name="Sponsor Name" visible="true" hasAll="true" primaryKey="SponsorIDTK">
+      <Table name="dim_sponsor">
+      </Table>
+      <Level name="Sponsor Name" visible="true" column="SponsorName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Sponsor Contact ID" visible="true" hasAll="true" primaryKey="SponsorIDTK">
+      <Table name="dim_sponsor">
+      </Table>
+      <Level name="Sponsor Contact ID" visible="true" column="SponsorID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="Main Activities" visible="true" cache="true" enabled="true">
+    <Table name="fact_main_activity">
+    </Table>
+    <DimensionUsage source="Case Start Date" name="CaseStartDate" visible="true" foreignKey="case_start_date_tk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Case End Date" name="CaseEndDate" visible="true" foreignKey="case_end_date_tk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Main Start Date" name="MainStartDate" visible="true" foreignKey="case_main_start_date_tk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Main End Date" name="MainEndDate" visible="true" foreignKey="case_main_end_date_tk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Case Client" name="CaseClient" visible="true" foreignKey="caseClientIdTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Case" name="Case" visible="true" foreignKey="CaseIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Project" name="Project" visible="true" foreignKey="ProjectTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Representative" name="Representative" visible="true" foreignKey="RepresentativeIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Country Coordinator" name="CountryCoordinator" visible="true" foreignKey="CountryCoordinatorIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Sector Coordinator" name="SectorCoordinator" visible="true" foreignKey="SectorCoordinatorIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Project Officer" name="ProjectOfficer" visible="true" foreignKey="ProjectOfficerIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Expert" name="Expert" visible="true" foreignKey="ExpertIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Sponsor" name="Sponsor" visible="true" foreignKey="SponsorIDTK" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Count Case Clients" column="case_client_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+    <Measure name="Count Cases" column="case_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Expert Process" visible="true" cache="true" enabled="true">
+    <Table name="fact_expert">
+    </Table>
+    <DimensionUsage source="Case Client" name="Expert CaseClient" visible="true" foreignKey="caseClientIdTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Expert Case" name="Expert Case" visible="true" foreignKey="CaseIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Expert" name="Expert" visible="true" foreignKey="ExpertIDTK" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Count Activities" column="activity_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+    <Measure name="Count Case Clients" column="case_client_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+    <Measure name="Count Cases" column="case_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="MVO Questions" visible="true" cache="true" enabled="true">
+    <Table name="fact_mvo">
+    </Table>
+    <DimensionUsage source="MVO Question" name="MVO Question" visible="true" foreignKey="QuestionIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="MVO Answer" name="MVO Answer" visible="true" foreignKey="AnswerIDTK" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Count Submissions" column="unique_submission_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
