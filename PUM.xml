@@ -55,6 +55,20 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date Submission Intake">
+    <Hierarchy visible="true" hasAll="true" primaryKey="date_tk">
+      <Table name="dim_date1">
+      </Table>
+      <Level name="Year" visible="true" column="year" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month" ordinalColumn="month" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day_of_month" type="Integer" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+      <Level name="Date" visible="true" column="date_field" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="MVO Question">
     <Hierarchy name="Question ID" visible="true" hasAll="true" primaryKey="QuestionIDTK">
       <Table name="dim_mvo_question">
@@ -217,7 +231,7 @@
     <Hierarchy name="Case PUM Sequence" visible="true" hasAll="true" primaryKey="CaseIDTK">
       <Table name="dim_case">
       </Table>
-      <Level name="Case PUM Sequence" visible="true" column="PumCaseSequence" type="Integer" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="Case PUM Sequence" visible="true" column="PumCaseSequence" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
     <Hierarchy name="Case PUM Type" visible="true" hasAll="true" primaryKey="CaseIDTK">
@@ -457,6 +471,50 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Intake Case">
+    <Hierarchy name="Intake Case ID" visible="true" hasAll="true" primaryKey="IntakeCaseIDTK">
+      <Table name="dim_intake_case">
+      </Table>
+      <Level name="Intake CaseID" visible="true" column="IntakeCaseID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Intake Case Status" visible="true" hasAll="true" primaryKey="IntakeCaseIDTK">
+      <Table name="dim_intake_case">
+      </Table>
+      <Level name="Intake Case Status" visible="true" column="IntakeCaseStatus" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Intake Case Subject" visible="true" hasAll="true" primaryKey="IntakeCaseIDTK">
+      <Table name="dim_intake_case">
+      </Table>
+      <Level name="Intake Case Subject" visible="true" column="IntakeCaseSubject" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Assessment Anamon" visible="true" hasAll="true" primaryKey="IntakeCaseIDTK">
+      <Table name="dim_intake_case">
+      </Table>
+      <Level name="Assessment Anamon" visible="true" column="AssessmentAnamon" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Assessment Country Coordinator" visible="true" hasAll="true" primaryKey="IntakeCaseIDTK">
+      <Table name="dim_intake_case">
+      </Table>
+      <Level name="Assessment Country Coordinator" visible="true" column="AssessmentCC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Assessment Sector Coordinator" visible="true" hasAll="true" primaryKey="IntakeCaseIDTK">
+      <Table name="dim_intake_case">
+      </Table>
+      <Level name="Assessment Sector Coordinator" visible="true" column="AssessmentSC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Assessment Representative" visible="true" hasAll="true" primaryKey="IntakeCaseIDTK">
+      <Table name="dim_intake_case">
+      </Table>
+      <Level name="Assessment Representative" visible="true" column="AssessmentRepresentative" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Sponsor">
     <Hierarchy name="Sponsor Name" visible="true" hasAll="true" primaryKey="SponsorIDTK">
       <Table name="dim_sponsor">
@@ -482,11 +540,11 @@
     </DimensionUsage>
     <DimensionUsage source="Main End Date" name="MainEndDate" visible="true" foreignKey="case_main_end_date_tk" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Case Client" name="CaseClient" visible="true" foreignKey="caseClientIdTK" highCardinality="false">
+    <DimensionUsage source="Case Client" name="CaseClient" visible="true" foreignKey="CaseClientIDTK" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Case" name="Case" visible="true" foreignKey="CaseIDTK" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Project" name="Project" visible="true" foreignKey="ProjectTK" highCardinality="false">
+    <DimensionUsage source="Project" name="Project" visible="true" foreignKey="ProjectIDTK" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Representative" name="Representative" visible="true" foreignKey="RepresentativeIDTK" highCardinality="false">
     </DimensionUsage>
@@ -508,11 +566,43 @@
   <Cube name="Expert Process" visible="true" cache="true" enabled="true">
     <Table name="fact_expert">
     </Table>
-    <DimensionUsage source="Case Client" name="Expert CaseClient" visible="true" foreignKey="caseClientIdTK" highCardinality="false">
-    </DimensionUsage>
-    <DimensionUsage source="Expert Case" name="Expert Case" visible="true" foreignKey="CaseIDTK" highCardinality="false">
+    <DimensionUsage source="Expert Case" name="Expert Case" visible="true" foreignKey="ExpertCaseIDTK" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Expert" name="Expert" visible="true" foreignKey="ExpertIDTK" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Count Activities" column="activity_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+    <Measure name="Count Case Clients" column="case_client_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+    <Measure name="Count Cases" column="case_id" datatype="Integer" aggregator="distinct count" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Project Intake" visible="true" cache="true" enabled="true">
+    <Table name="fact_intake">
+    </Table>
+    <DimensionUsage source="Intake Case" name="Intake Case" visible="true" foreignKey="IntakeCaseIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Case Start Date" name="CaseStartDate" visible="true" foreignKey="case_start_date_tk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Case End Date" name="CaseEndDate" visible="true" foreignKey="case_end_date_tk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Main Start Date" name="MainStartDate" visible="true" foreignKey="case_main_start_date_tk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Main End Date" name="MainEndDate" visible="true" foreignKey="case_main_end_date_tk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Case Client" name="CaseClient" visible="true" foreignKey="CaseClientIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Project" name="Project" visible="true" foreignKey="ProjectIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Representative" name="Representative" visible="true" foreignKey="RepresentativeIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Country Coordinator" name="CountryCoordinator" visible="true" foreignKey="CountryCoordinatorIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Sector Coordinator" name="SectorCoordinator" visible="true" foreignKey="SectorCoordinatorIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Project Officer" name="ProjectOfficer" visible="true" foreignKey="ProjectOfficerIDTK" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Sponsor" name="Sponsor" visible="true" foreignKey="SponsorIDTK" highCardinality="false">
     </DimensionUsage>
     <Measure name="Count Activities" column="activity_id" datatype="Integer" aggregator="distinct count" visible="true">
     </Measure>

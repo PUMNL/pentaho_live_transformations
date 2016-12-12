@@ -76,13 +76,8 @@
   <notepads>
   </notepads>
   <connection>
-<<<<<<< HEAD
-    <name>PUM Live CiviCRM Database</name>
+    <name>PUM CiviCRM Database</name>
     <server>132.160.150.21</server>
-=======
-    <name>PUM CiviCRM Database &#x28;Test&#x29;</name>
-    <server>test.pum.nl</server>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
     <type>MYSQL</type>
     <access>Native</access>
     <database>civicrm</database>
@@ -108,19 +103,14 @@
     </attributes>
   </connection>
   <connection>
-<<<<<<< HEAD
-    <name>PUM Live Drupal Database</name>
-    <server>132.160.150.21</server>
-=======
-    <name>PUM Drupal Database &#x28;Test&#x29;</name>
-    <server>test.pum.nl</server>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+    <name>PUM Datawarehouse</name>
+    <server>132.160.150.28</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>drupal</database>
+    <database>datawarehouse</database>
     <port>3306</port>
-    <username>sa-connect-db</username>
-    <password>Encrypted 2be98afc86aa7f2e4a81cbd658a80aec9</password>
+    <username>pentaho</username>
+    <password>Encrypted 2be98afc86aa78281a54aaf7e8a95a7ce</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -140,19 +130,14 @@
     </attributes>
   </connection>
   <connection>
-<<<<<<< HEAD
-    <name>PUM Live Datawarehouse</name>
-    <server>132.160.150.28</server>
-=======
-    <name>Test PUM Datawarehouse</name>
-    <server>132.160.170.18</server>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+    <name>PUM Drupal Database</name>
+    <server>132.160.150.21</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>datawarehouse</database>
+    <database>drupal</database>
     <port>3306</port>
-    <username>pentaho</username>
-    <password>Encrypted 2be98afc86aa78281a54aaf7e8a95a7ce</password>
+    <username>sa-connect-db</username>
+    <password>Encrypted 2be98afc86aa7f2e4a81cbd658a80aec9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -165,7 +150,7 @@
       <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
@@ -200,11 +185,7 @@
            </partitioning>
       <schema/>
       <table>dim_mvo_answer</table>
-<<<<<<< HEAD
-      <connection>PUM Live Datawarehouse</connection>
-=======
-      <connection>Test PUM Datawarehouse</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -274,11 +255,7 @@
            </partitioning>
       <schema/>
       <table>dim_mvo_question</table>
-<<<<<<< HEAD
-      <connection>PUM Live Datawarehouse</connection>
-=======
-      <connection>Test PUM Datawarehouse</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -336,11 +313,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<<<<<<< HEAD
-    <connection>PUM Live CiviCRM Database</connection>
-=======
-    <connection>PUM CiviCRM Database &#x28;Test&#x29;</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+    <connection>PUM CiviCRM Database</connection>
     <sql>SELECT &#xa;uf.contact_id AS contact_id,&#xa;uf.uf_id AS user_id,&#xa;cc.display_name AS contact_name&#xa;&#xa;FROM civicrm_uf_match uf&#xa;JOIN civicrm_contact cc ON uf.contact_id &#x3d; cc.id&#xa;&#xa;ORDER BY uf.uf_id&#xa;</sql>
     <limit>0</limit>
     <lookup/>
@@ -476,11 +449,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<<<<<<< HEAD
-    <connection>PUM Live Drupal Database</connection>
-=======
-    <connection>PUM Drupal Database &#x28;Test&#x29;</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+    <connection>PUM Drupal Database</connection>
     <sql>SELECT &#xa;node.title AS webform_name,&#xa;ws.uid AS drupal_user_id, &#xa;wsu.name AS drupal_user, &#xa;ws.sid AS unique_submission_id,&#xa;ws.serial AS drupal_submission_id,&#xa;CAST&#x28;DATE_FORMAT&#x28;FROM_UNIXTIME&#x28;ws.submitted&#x29;, &#x22;&#x25;Y&#x25;m&#x25;d&#x25;H&#x25;i&#x25;s&#x22;&#x29; AS unsigned&#x29; AS drupal_submitted_date_tk,&#xa;wc.cid AS component_id,&#xa;wc.name AS question, &#xa;wsd.data AS answer,&#xa;CONCAT&#x28;wsd.nid, wc.cid&#x29; AS question_id,&#xa;CONCAT&#x28;ws.sid, wc.cid&#x29; AS answer_id&#xa;&#xa;FROM webform_submitted_data wsd&#xa;JOIN node ON wsd.nid &#x3d; node.nid&#xa;JOIN webform_component wc ON wsd.cid &#x3d; wc.cid AND wsd.nid &#x3d; wc.nid&#xa;JOIN webform_submissions ws ON wsd.sid &#x3d; ws.sid AND wsd.nid &#x3d; ws.nid&#xa;JOIN users wsu ON ws.uid &#x3d; wsu.uid&#xa;&#xa;WHERE wsd.nid IN &#x28;728, 765&#x29; and wsd.cid IN &#x28;85, 99, 100, 93, 94, 81, 97, 83, 26, 27, 28, 66, 67, 68, 70, 71&#x29;&#xa;&#xa;ORDER BY ws.uid&#xa;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
@@ -776,11 +745,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<<<<<<< HEAD
-    <connection>PUM Live Datawarehouse</connection>
-=======
-    <connection>Test PUM Datawarehouse</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+    <connection>PUM Datawarehouse</connection>
     <schema/>
     <table>fact_mvo</table>
     <commit>1000</commit>

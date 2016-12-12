@@ -76,13 +76,8 @@
   <notepads>
   </notepads>
   <connection>
-<<<<<<< HEAD
-    <name>PUM Live CiviCRM connection</name>
-    <server>132.160.150.21</server>
-=======
     <name>PUM CiviCRM connection</name>
-    <server>test.pum.nl</server>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+    <server>132.160.150.21</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>civicrm</database>
@@ -108,13 +103,8 @@
     </attributes>
   </connection>
   <connection>
-<<<<<<< HEAD
-    <name>PUM Live Datawarehouse</name>
-    <server>132.160.150.28</server>
-=======
     <name>PUM Datawarehouse</name>
-    <server>132.160.170.18</server>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
+    <server>132.160.150.28</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>datawarehouse</database>
@@ -166,11 +156,7 @@
            </partitioning>
       <schema/>
       <table>dim_activity</table>
-<<<<<<< HEAD
-      <connection>PUM Live Datawarehouse</connection>
-=======
       <connection>PUM Datawarehouse</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -492,11 +478,7 @@
            </partitioning>
       <schema/>
       <table>dim_expert_case</table>
-<<<<<<< HEAD
-      <connection>PUM Live Datawarehouse</connection>
-=======
       <connection>PUM Datawarehouse</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -566,11 +548,7 @@
            </partitioning>
       <schema/>
       <table>dim_expert</table>
-<<<<<<< HEAD
-      <connection>PUM Live Datawarehouse</connection>
-=======
       <connection>PUM Datawarehouse</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -712,11 +690,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<<<<<<< HEAD
-    <connection>PUM Live CiviCRM connection</connection>
-=======
     <connection>PUM CiviCRM connection</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
     <sql>SELECT &#xa;cc.id AS case_id,&#xa;ctov.label AS case_type,&#xa;csov.label AS case_status,&#xa;CAST&#x28;DATE_FORMAT&#x28;cc.start_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_start_date_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;cc.end_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_end_date_tk,&#xa;cc.subject AS case_subject,&#xa;reject_expert_application_223 AS expert_reject,&#xa;expert.contact_id AS expert_id,&#xa;expcontact.display_name AS expert_name,&#xa;CAST&#x28;expcontact.gender_id AS char&#x28;15&#x29;&#x29; AS expert_gender,&#xa;CAST&#x28;DATE_FORMAT&#x28;expcontact.birth_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS expert_birth_date_tk,&#xa;expadr.city AS expert_city,&#xa;expadr.postal_code AS expert_post_code,&#xa;expcbs.gemeente_24 AS expert_gemeente,&#xa;expcbs.buurt_25 AS expert_buurt,&#xa;expcbs.buurtcode_26 AS expert_buurtcode,&#xa;expsector.label AS expert_main_sector,&#xa;expsccontact.id AS expert_sector_coordinator_id,&#xa;expsccontact.display_name AS expert_sector_coordinator_name,&#xa;expadd.shortname_14 AS expert_short_name,&#xa;expexp.expert_status_123 AS expert_status,&#xa;CAST&#x28;DATE_FORMAT&#x28;expexp.start_date_expert_status_124, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS expert_status_start_date_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;expexp.end_date_expert_status_125, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS expert_status_end_date_tk,&#xa;CAST&#x28;expexp.cv_in_mutation_383 AS char&#x28;15&#x29;&#x29; AS expert_cv_in_mutation&#xa;&#xa;FROM civicrm_case cc&#xa;LEFT JOIN civicrm_option_value ctov ON cc.case_type_id &#x3d; ctov.value AND ctov.option_group_id &#x3d; 27&#xa;LEFT JOIN civicrm_option_value csov ON cc.status_id &#x3d; csov.value AND csov.option_group_id &#x3d; 28&#xa;LEFT JOIN civicrm_case_contact expert ON cc.id &#x3d; expert.case_id&#xa;LEFT JOIN civicrm_contact expcontact ON expert.contact_id &#x3d; expcontact.id&#xa;LEFT JOIN civicrm_contact_segment expcs ON expert.contact_id &#x3d; expcs.contact_id AND expcs.is_active &#x3d; 1 AND expcs.role_value &#x3d; &#x22;Expert&#x22; AND expcs.is_main &#x3d; 1&#xa;LEFT JOIN civicrm_segment expsector ON expcs.segment_id &#x3d; expsector.id&#xa;LEFT JOIN civicrm_contact_segment scsc ON expsector.id &#x3d; scsc.segment_id AND scsc.is_active &#x3d; 1 AND scsc.role_value &#x3d; &#x22;Sector Coordinator&#x22;&#xa;LEFT JOIN civicrm_contact expsccontact ON scsc.contact_id &#x3d; expsccontact.id&#xa;LEFT JOIN civicrm_address expadr ON expcontact.id &#x3d; expadr.contact_id AND is_primary &#x3d; 1&#xa;LEFT JOIN civicrm_value_adresgegevens_12 expcbs ON expadr.id &#x3d; expcbs.entity_id&#xa;LEFT JOIN civicrm_value_expert_data_20 expexp ON expcontact.id &#x3d; expexp.entity_id&#xa;LEFT JOIN civicrm_value_additional_data_4 expadd ON expcontact.id &#x3d; expadd.entity_id&#xa;LEFT JOIN civicrm_value_rejection_application_new_expert_37 expreject ON cc.id &#x3d; expreject.entity_id&#xa;&#xa;WHERE cc.is_deleted &#x3d; 0 AND ctov.label IN&#x28;&#x22;Expertapplication&#x22;, &#x22;ExitExpert&#x22;&#x29;&#xa;ORDER BY cc.id</sql>
     <limit>0</limit>
     <lookup/>
@@ -742,11 +716,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<<<<<<< HEAD
-    <connection>PUM Live CiviCRM connection</connection>
-=======
     <connection>PUM CiviCRM connection</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
     <sql>SELECT &#xa;cact.case_id AS case_id,&#xa;act.id AS activity_id,&#xa;atov.label AS activity_type,&#xa;act.subject AS activity_subject,&#xa;asov.label AS activity_status,&#xa;act.is_current_revision AS activity_current_revision,&#xa;act.original_id AS activity_original_id,&#xa;actexit.reden_exit_414 AS expert_exit_reden,&#xa;CAST&#x28;DATE_FORMAT&#x28;actexit.datum_exit_415, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS expert_exit_date_tk,&#xa;actexit.verlengen_418 AS expert_verlenging,&#xa;actexit.reden_verlenging_419 AS expert_verlenging_reden,&#xa;CAST&#x28;DATE_FORMAT&#x28;actexit.einddatum_verlenging_420, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS expert_verlenging_end_date_tk&#xa;&#xa;FROM civicrm_activity act&#xa;JOIN civicrm_case_activity cact ON act.id &#x3d; cact.activity_id&#xa;JOIN civicrm_case cc ON cact.case_id &#x3d; cc.id&#xa;&#xa;LEFT JOIN civicrm_value_exit_expert_76 actexit ON act.id &#x3d; actexit.entity_id&#xa;LEFT JOIN civicrm_option_value atov ON act.activity_type_id &#x3d; atov.value AND atov.option_group_id &#x3d; 2&#xa;LEFT JOIN civicrm_option_value asov ON act.status_id &#x3d; asov.value AND asov.option_group_id &#x3d; 26&#xa;&#xa;WHERE cc.case_type_id LIKE &#x22;&#x25;12&#x25;&#x22; OR cc.case_type_id LIKE &#x22;&#x25;36&#x25;&#x22;&#xa;ORDER BY cact.case_id</sql>
     <limit>0</limit>
     <lookup/>
@@ -917,11 +887,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<<<<<<< HEAD
-    <connection>PUM Live Datawarehouse</connection>
-=======
     <connection>PUM Datawarehouse</connection>
->>>>>>> c0a4d7827c54d84d79ede4842494191031a4f6e0
     <schema/>
     <table>fact_expert</table>
     <commit>1000</commit>

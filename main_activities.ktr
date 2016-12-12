@@ -76,7 +76,7 @@
   <notepads>
   </notepads>
   <connection>
-    <name>PUM Live CiviCRM connection</name>
+    <name>PUM CiviCRM connection</name>
     <server>132.160.150.21</server>
     <type>MYSQL</type>
     <access>Native</access>
@@ -103,7 +103,7 @@
     </attributes>
   </connection>
   <connection>
-    <name>PUM Live Datawarehouse</name>
+    <name>PUM Datawarehouse</name>
     <server>132.160.150.28</server>
     <type>MYSQL</type>
     <access>Native</access>
@@ -168,7 +168,7 @@
            </partitioning>
       <schema/>
       <table>dim_case</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -528,7 +528,7 @@
            </partitioning>
       <schema/>
       <table>dim_case_client</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -613,7 +613,7 @@
            </partitioning>
       <schema/>
       <table>dim_country_country_coordinator</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -678,7 +678,7 @@
            </partitioning>
       <schema/>
       <table>dim_expert</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -757,7 +757,7 @@
    <leftvalue>case_type</leftvalue>
    <function>IN LIST</function>
    <rightvalue/>
-   <value><name>constant</name><type>String</type><text>Advice&#x3b;Business&#x3b;Seminar&#x3b;RemoteCoaching&#x3b;PDV</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+   <value><name>constant</name><type>String</type><text>Advice&#x3b;Business&#x3b;Seminar&#x3b;RemoteCoaching&#x3b;PDV&#x3b;Projectintake</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>Y</negated>
    <operator>AND</operator>
@@ -787,8 +787,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>PUM Live CiviCRM connection</connection>
-    <sql>SELECT &#xa;&#xa;cc.id AS case_id,&#xa;pumcase.case_sequence AS case_pum_sequence,&#xa;pumcase.case_type AS case_pum_type,&#xa;pumcase.case_country AS case_pum_country,&#xa;ctov.label AS case_type,&#xa;csov.label AS case_status,&#xa;CAST&#x28;DATE_FORMAT&#x28;cc.start_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_start_date_tk,&#xa;cc.subject AS case_subject,&#xa;client.contact_id AS case_client_id,&#xa;clientcontact.display_name AS case_client_name,&#xa;clientadr.city AS case_client_city,&#xa;clientcountry.name AS client_country_name,&#xa;clientregion.name AS client_worldregion,&#xa;clientsector.label AS client_sector,&#xa;custdata.what_is_the_operational_model_of_105 AS client_operational_model,&#xa;cdov.label AS client_legal_form,&#xa;repcontact.id AS representative_id,&#xa;repcontact.display_name AS representative_name,&#xa;cccontact.id AS country_coordinator_id,&#xa;cccontact.display_name AS country_coordinator_name,&#xa;cccontact.birth_date AS country_coordinator_birth_date,&#xa;CAST&#x28;cccontact.gender_id AS char&#x28;15&#x29;&#x29; AS country_coordinator_gender,&#xa;sccontact.id AS sector_coordinator_id,&#xa;sccontact.display_name AS sector_coordinator_name,&#xa;sccontact.birth_date AS sector_coordinator_birth_date,&#xa;scsector.label AS sector_coordinator_sector,&#xa;CAST&#x28;sccontact.gender_id AS char&#x28;15&#x29;&#x29; AS sector_coordinator_gender,&#xa;expcontact.id AS expert_id,&#xa;expcontact.display_name AS expert_name,&#xa;expcontact.birth_date AS expert_birth_date,&#xa;expsector.label AS expert_sector,&#xa;CAST&#x28;expcontact.gender_id AS char&#x28;15&#x29;&#x29; AS expert_gender,&#xa;pocontact.id AS project_officer_id,&#xa;pocontact.display_name AS project_officer_name,&#xa;CAST&#x28;DATE_FORMAT&#x28;main.start_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_main_start_date_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;main.end_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_main_end_date_tk,&#xa;proj.id AS project_id,&#xa;proj.title AS project_name,&#xa;proj.projectmanager_id AS projectmanager_id,&#xa;projcontact.display_name AS projectmanager_name,&#xa;sponsor.id AS sponsor_id,&#xa;sponsor.display_name AS sponsor_name&#xa;&#xa;FROM civicrm_case cc&#xa;LEFT JOIN civicrm_case_pum pumcase ON cc.id &#x3d; pumcase.entity_id&#xa;LEFT JOIN civicrm_donor_link  donor ON cc.id &#x3d; donor.entity_id AND donor.entity &#x3d; &#x22;Case&#x22; AND donor.is_fa_donor &#x3d; 1 AND donor.is_active &#x3d; 1&#xa;LEFT JOIN civicrm_contribution donation ON donor.donation_entity_id &#x3d; donation.id AND donation.is_test &#x3d; 0&#xa;LEFT JOIN civicrm_contact sponsor ON donation.contact_id &#x3d; sponsor.id&#xa;LEFT JOIN civicrm_option_value ctov ON cc.case_type_id &#x3d; ctov.value AND ctov.option_group_id &#x3d; 27&#xa;LEFT JOIN civicrm_option_value csov ON cc.status_id &#x3d; csov.value AND csov.option_group_id &#x3d; 28&#xa;LEFT JOIN civicrm_case_contact client ON cc.id &#x3d; client.case_id&#xa;LEFT JOIN civicrm_contact clientcontact ON client.contact_id &#x3d; clientcontact.id&#xa;LEFT JOIN civicrm_value_customer_data_18 custdata ON clientcontact.id &#x3d; custdata.entity_id&#xa;LEFT JOIN civicrm_option_value cdov ON custdata.legal_form_of_the_organisation_82 &#x3d; cdov.value AND cdov.option_group_id &#x3d; 109&#xa;LEFT JOIN civicrm_contact_segment clientcs ON client.contact_id &#x3d; clientcs.contact_id AND clientcs.is_active &#x3d; 1 AND clientcs.role_value &#x3d; &#x22;Customer&#x22;&#xa;LEFT JOIN civicrm_segment clientsector ON clientcs.segment_id &#x3d; clientsector.id&#xa;LEFT JOIN civicrm_address clientadr ON clientcontact.id &#x3d; clientadr.contact_id AND is_primary &#x3d; 1&#xa;LEFT JOIN civicrm_country clientcountry ON clientadr.country_id &#x3d; clientcountry.id&#xa;LEFT JOIN civicrm_worldregion clientregion ON clientcountry.region_id &#x3d; clientregion.id&#xa;LEFT JOIN civicrm_relationship reprel ON clientcontact.id &#x3d; reprel.contact_id_a AND reprel.case_id is null AND reprel.relationship_type_id &#x3d; 23&#xa;LEFT JOIN civicrm_contact repcontact ON reprel.contact_id_b &#x3d; repcontact.id&#xa;LEFT JOIN civicrm_value_country pumcountry ON clientcountry.id &#x3d; pumcountry.civicrm_country_id&#xa;LEFT JOIN civicrm_relationship ccrel ON pumcountry.entity_id &#x3d; ccrel.contact_id_a AND ccrel.case_id is null AND ccrel.relationship_type_id &#x3d; 16&#xa;LEFT JOIN civicrm_contact cccontact ON ccrel.contact_id_b &#x3d; cccontact.id&#xa;LEFT JOIN civicrm_relationship screl ON clientcontact.id &#x3d; screl.contact_id_a AND screl.case_id is null AND screl.relationship_type_id &#x3d; 24&#xa;LEFT JOIN civicrm_contact sccontact ON screl.contact_id_b &#x3d; sccontact.id&#xa;LEFT JOIN civicrm_contact_segment sccs ON sccontact.id &#x3d; sccs.contact_id AND sccs.is_active &#x3d; 1 AND sccs.role_value &#x3d; &#x22;Sector Coordinator&#x22;&#xa;LEFT JOIN civicrm_segment scsector ON sccs.segment_id &#x3d; scsector.id&#xa;LEFT JOIN civicrm_relationship porel ON pumcountry.entity_id &#x3d; porel.contact_id_a AND porel.case_id is null AND porel.relationship_type_id &#x3d; 20&#xa;LEFT JOIN civicrm_contact pocontact ON porel.contact_id_b &#x3d; pocontact.id&#xa;LEFT JOIN civicrm_relationship exprel ON clientcontact.id &#x3d; exprel.contact_id_a AND exprel.case_id &#x3d; cc.id AND exprel.relationship_type_id &#x3d; 17&#xa;LEFT JOIN civicrm_contact expcontact ON exprel.contact_id_b &#x3d; expcontact.id&#xa;LEFT JOIN civicrm_contact_segment expcs ON expcontact.id &#x3d; expcs.contact_id AND expcs.is_active &#x3d; 1 AND expcs.role_value &#x3d; &#x22;Expert&#x22; AND expcs.is_main &#x3d; 1&#xa;LEFT JOIN civicrm_segment expsector ON expcs.segment_id &#x3d; expsector.id&#xa;LEFT JOIN civicrm_value_main_activity_info main ON cc.id &#x3d; main.entity_id&#xa;LEFT JOIN civicrm_case_project cp ON cc.id &#x3d; cp.case_id&#xa;LEFT JOIN civicrm_project proj ON cp.project_id &#x3d; proj.id&#xa;LEFT JOIN civicrm_contact projcontact ON proj.projectmanager_id &#x3d; projcontact.id&#xa;&#xa;WHERE cc.is_deleted &#x3d; 0</sql>
+    <connection>PUM CiviCRM connection</connection>
+    <sql>SELECT &#xa;&#xa;cc.id AS case_id,&#xa;pumcase.case_sequence AS case_pum_sequence,&#xa;pumcase.case_type AS case_pum_type,&#xa;pumcase.case_country AS case_pum_country,&#xa;ctov.label AS case_type,&#xa;csov.label AS case_status,&#xa;CAST&#x28;DATE_FORMAT&#x28;cc.start_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_start_date_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;cc.end_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_end_date_tk,&#xa;cc.subject AS case_subject,&#xa;client.contact_id AS case_client_id,&#xa;clientcontact.display_name AS case_client_name,&#xa;clientadr.city AS case_client_city,&#xa;clientcountry.name AS client_country_name,&#xa;clientregion.name AS client_worldregion,&#xa;clientsector.label AS client_sector,&#xa;custdata.what_is_the_operational_model_of_105 AS client_operational_model,&#xa;cdov.label AS client_legal_form,&#xa;repcontact.id AS representative_id,&#xa;repcontact.display_name AS representative_name,&#xa;cccontact.id AS country_coordinator_id,&#xa;cccontact.display_name AS country_coordinator_name,&#xa;cccontact.birth_date AS country_coordinator_birth_date,&#xa;CAST&#x28;cccontact.gender_id AS char&#x28;15&#x29;&#x29; AS country_coordinator_gender,&#xa;sccontact.id AS sector_coordinator_id,&#xa;sccontact.display_name AS sector_coordinator_name,&#xa;sccontact.birth_date AS sector_coordinator_birth_date,&#xa;scsector.label AS sector_coordinator_sector,&#xa;CAST&#x28;sccontact.gender_id AS char&#x28;15&#x29;&#x29; AS sector_coordinator_gender,&#xa;expcontact.id AS expert_id,&#xa;expcontact.display_name AS expert_name,&#xa;expcontact.birth_date AS expert_birth_date,&#xa;expsector.label AS expert_sector,&#xa;CAST&#x28;expcontact.gender_id AS char&#x28;15&#x29;&#x29; AS expert_gender,&#xa;pocontact.id AS project_officer_id,&#xa;pocontact.display_name AS project_officer_name,&#xa;CAST&#x28;DATE_FORMAT&#x28;main.start_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_main_start_date_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;main.end_date, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS case_main_end_date_tk,&#xa;proj.id AS project_id,&#xa;proj.title AS project_name,&#xa;proj.projectmanager_id AS projectmanager_id,&#xa;projcontact.display_name AS projectmanager_name,&#xa;sponsor.id AS sponsor_id,&#xa;sponsor.display_name AS sponsor_name&#xa;&#xa;FROM civicrm_case cc&#xa;LEFT JOIN civicrm_case_pum pumcase ON cc.id &#x3d; pumcase.entity_id&#xa;LEFT JOIN civicrm_donor_link  donor ON cc.id &#x3d; donor.entity_id AND donor.entity &#x3d; &#x22;Case&#x22; AND donor.is_fa_donor &#x3d; 1 AND donor.is_active &#x3d; 1&#xa;LEFT JOIN civicrm_contribution donation ON donor.donation_entity_id &#x3d; donation.id AND donation.is_test &#x3d; 0&#xa;LEFT JOIN civicrm_contact sponsor ON donation.contact_id &#x3d; sponsor.id&#xa;LEFT JOIN civicrm_option_value ctov ON cc.case_type_id &#x3d; ctov.value AND ctov.option_group_id &#x3d; 27&#xa;LEFT JOIN civicrm_option_value csov ON cc.status_id &#x3d; csov.value AND csov.option_group_id &#x3d; 28&#xa;LEFT JOIN civicrm_case_contact client ON cc.id &#x3d; client.case_id&#xa;LEFT JOIN civicrm_contact clientcontact ON client.contact_id &#x3d; clientcontact.id&#xa;LEFT JOIN civicrm_value_customer_data_18 custdata ON clientcontact.id &#x3d; custdata.entity_id&#xa;LEFT JOIN civicrm_option_value cdov ON custdata.legal_form_of_the_organisation_82 &#x3d; cdov.value AND cdov.option_group_id &#x3d; 109&#xa;LEFT JOIN civicrm_contact_segment clientcs ON client.contact_id &#x3d; clientcs.contact_id AND clientcs.is_active &#x3d; 1 AND clientcs.role_value &#x3d; &#x22;Customer&#x22;&#xa;LEFT JOIN civicrm_segment clientsector ON clientcs.segment_id &#x3d; clientsector.id&#xa;LEFT JOIN civicrm_address clientadr ON clientcontact.id &#x3d; clientadr.contact_id AND is_primary &#x3d; 1&#xa;LEFT JOIN civicrm_country clientcountry ON clientadr.country_id &#x3d; clientcountry.id&#xa;LEFT JOIN civicrm_worldregion clientregion ON clientcountry.region_id &#x3d; clientregion.id&#xa;LEFT JOIN civicrm_relationship reprel ON clientcontact.id &#x3d; reprel.contact_id_a AND reprel.case_id is null AND reprel.relationship_type_id &#x3d; 23&#xa;LEFT JOIN civicrm_contact repcontact ON reprel.contact_id_b &#x3d; repcontact.id&#xa;LEFT JOIN civicrm_value_country pumcountry ON clientcountry.id &#x3d; pumcountry.civicrm_country_id&#xa;LEFT JOIN civicrm_relationship ccrel ON pumcountry.entity_id &#x3d; ccrel.contact_id_a AND ccrel.case_id is null AND ccrel.relationship_type_id &#x3d; 16&#xa;LEFT JOIN civicrm_contact cccontact ON ccrel.contact_id_b &#x3d; cccontact.id&#xa;LEFT JOIN civicrm_relationship screl ON clientcontact.id &#x3d; screl.contact_id_a AND screl.case_id is null AND screl.relationship_type_id &#x3d; 24&#xa;LEFT JOIN civicrm_contact sccontact ON screl.contact_id_b &#x3d; sccontact.id&#xa;LEFT JOIN civicrm_contact_segment sccs ON sccontact.id &#x3d; sccs.contact_id AND sccs.is_active &#x3d; 1 AND sccs.role_value &#x3d; &#x22;Sector Coordinator&#x22;&#xa;LEFT JOIN civicrm_segment scsector ON sccs.segment_id &#x3d; scsector.id&#xa;LEFT JOIN civicrm_relationship porel ON pumcountry.entity_id &#x3d; porel.contact_id_a AND porel.case_id is null AND porel.relationship_type_id &#x3d; 20&#xa;LEFT JOIN civicrm_contact pocontact ON porel.contact_id_b &#x3d; pocontact.id&#xa;LEFT JOIN civicrm_relationship exprel ON clientcontact.id &#x3d; exprel.contact_id_a AND exprel.case_id &#x3d; cc.id AND exprel.relationship_type_id &#x3d; 17&#xa;LEFT JOIN civicrm_contact expcontact ON exprel.contact_id_b &#x3d; expcontact.id&#xa;LEFT JOIN civicrm_contact_segment expcs ON expcontact.id &#x3d; expcs.contact_id AND expcs.is_active &#x3d; 1 AND expcs.role_value &#x3d; &#x22;Expert&#x22; AND expcs.is_main &#x3d; 1&#xa;LEFT JOIN civicrm_segment expsector ON expcs.segment_id &#x3d; expsector.id&#xa;LEFT JOIN civicrm_value_main_activity_info main ON cc.id &#x3d; main.entity_id&#xa;LEFT JOIN civicrm_case_project cp ON cc.id &#x3d; cp.case_id&#xa;LEFT JOIN civicrm_project proj ON cp.project_id &#x3d; proj.id&#xa;LEFT JOIN civicrm_contact projcontact ON proj.projectmanager_id &#x3d; projcontact.id&#xa;&#xa;WHERE cc.is_deleted &#x3d; 0</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -911,7 +911,7 @@
            </partitioning>
       <schema/>
       <table>dim_project</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -976,7 +976,7 @@
            </partitioning>
       <schema/>
       <table>dim_country_project_officer</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -1241,7 +1241,7 @@
            </partitioning>
       <schema/>
       <table>dim_client_representative</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -1296,7 +1296,7 @@
            </partitioning>
       <schema/>
       <table>dim_client_sector_coordinator</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -1366,7 +1366,7 @@
            </partitioning>
       <schema/>
       <table>dim_sponsor</table>
-      <connection>PUM Live Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -1419,7 +1419,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>PUM Live Datawarehouse</connection>
+    <connection>PUM Datawarehouse</connection>
     <schema/>
     <table>fact_main_activity</table>
     <commit>1000</commit>

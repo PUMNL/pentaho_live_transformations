@@ -76,14 +76,14 @@
   <notepads>
   </notepads>
   <connection>
-    <name>Local PUM CiviCRM connection</name>
-    <server>localhost</server>
+    <name>PUM CiviCRM connection</name>
+    <server>132.160.150.21</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>civicrm</database>
     <port>3306</port>
-    <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4a600bd61d296addb</password>
+    <username>sa-connect-db</username>
+    <password>Encrypted 2be98afc86aa7f2e4a81cbd658a80aec9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -103,41 +103,14 @@
     </attributes>
   </connection>
   <connection>
-    <name>Local PUM Datawarehouse</name>
-    <server>localhost</server>
+    <name>PUM Datawarehouse</name>
+    <server>132.160.150.28</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>pum_data_warehouse</database>
+    <database>datawarehouse</database>
     <port>3306</port>
-    <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4a600bd61d296addb</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>Test PUM Datawarehouse</name>
-    <server>pentaho.edeveloper.nl</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>civicrm_datawarehouse</database>
-    <port>3306</port>
-    <username>erik</username>
-    <password>Encrypted 2be98afc86aa7a285b80ab97fcc96fe8a</password>
+    <username>pentaho</username>
+    <password>Encrypted 2be98afc86aa78281a54aaf7e8a95a7ce</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -189,7 +162,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Local PUM Datawarehouse</connection>
+    <connection>PUM Datawarehouse</connection>
     <schema/>
     <table>fact_intake</table>
     <commit>1000</commit>
@@ -229,7 +202,7 @@
            </partitioning>
       <schema/>
       <table>dim_anamon</table>
-      <connection>Local PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -284,7 +257,7 @@
            </partitioning>
       <schema/>
       <table>dim_country_country_coordinator</table>
-      <connection>Local PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -339,7 +312,7 @@
            </partitioning>
       <schema/>
       <table>dim_intake_case</table>
-      <connection>Local PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -419,7 +392,7 @@
            </partitioning>
       <schema/>
       <table>dim_case_client</table>
-      <connection>Local PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -502,7 +475,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Local PUM CiviCRM connection</connection>
+    <connection>PUM CiviCRM connection</connection>
     <sql>SELECT &#xa;intake.case_id AS case_id,&#xa;csov.label AS case_status,&#xa;CAST&#x28;DATE_FORMAT&#x28;intake.date_submission, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_submission_tk,&#xa;intake.assess_rep_customer AS assess_rep_customer,&#xa;intake.assess_sc_customer AS assess_sc_customer,&#xa;intake.assess_cc_customer AS assess_cc_customer,&#xa;intake.assess_anamon_customer AS assess_anamon_customer,&#xa;intake.case_subject AS case_subject,&#xa;intake.customer_id AS customer_id,&#xa;intake.customer_name AS customer_name,&#xa;custadr.city AS customer_city,&#xa;intake.customer_country_name AS customer_country_name,&#xa;custregion.name AS customer_worldregion,&#xa;custdata.what_is_the_operational_model_of_105 AS customer_operational_model,&#xa;cdov.label AS customer_legal_form,&#xa;customersector.label AS customer_sector,&#xa;intake.representative_id AS representative_id,&#xa;intake.representative_name AS representative_name,&#xa;intake.anamon_id AS anamon_id,&#xa;anacontact.display_name AS anamon_name,&#xa;intake.country_coordinator_id AS country_coordinator_id,&#xa;cccontact.display_name AS country_coordinator_name,&#xa;intake.sector_coordinator_id AS sector_coordinator_id,&#xa;sccontact.display_name AS sector_coordinator_name,&#xa;intake.project_officer_id AS project_officer_id,&#xa;pocontact.display_name AS project_officer_name,&#xa;proj.id AS project_id,&#xa;proj.title AS project_name,&#xa;proj.projectmanager_id AS projectmanager_id,&#xa;projcontact.display_name AS projectmanager_name,&#xa;sponsor.id AS sponsor_id,&#xa;sponsor.display_name AS sponsor_name&#xa;&#xa;FROM pum_project_intake_view intake&#xa;LEFT JOIN civicrm_case_project cp ON intake.case_id &#x3d; cp.case_id&#xa;LEFT JOIN civicrm_project proj ON cp.project_id &#x3d; proj.id&#xa;LEFT JOIN civicrm_donor_link  donor ON intake.case_id &#x3d; entity_id AND donor.entity &#x3d; &#x22;Case&#x22; AND donor.is_fa_donor &#x3d; 1 AND donor.is_active &#x3d; 1&#xa;LEFT JOIN civicrm_contribution donation ON donor.donation_entity_id &#x3d; donation.id AND donation.is_test &#x3d; 0&#xa;LEFT JOIN civicrm_contact sponsor ON donation.contact_id &#x3d; sponsor.id&#xa;LEFT JOIN civicrm_option_value csov ON intake.case_status_id &#x3d; csov.value AND csov.option_group_id &#x3d; 28&#xa;LEFT JOIN civicrm_value_customer_data_18 custdata ON intake.customer_id &#x3d; custdata.entity_id&#xa;LEFT JOIN civicrm_option_value cdov ON custdata.legal_form_of_the_organisation_82 &#x3d; cdov.value AND cdov.option_group_id &#x3d; 109&#xa;LEFT JOIN civicrm_address custadr ON intake.customer_id &#x3d; custadr.contact_id AND is_primary &#x3d; 1&#xa;LEFT JOIN civicrm_country custcountry ON custadr.country_id &#x3d; custcountry.id&#xa;LEFT JOIN civicrm_worldregion custregion ON custcountry.region_id &#x3d; custregion.id&#xa;LEFT JOIN civicrm_contact cccontact ON intake.country_coordinator_id &#x3d; cccontact.id&#xa;LEFT JOIN civicrm_contact anacontact ON intake.anamon_id &#x3d; anacontact.id&#xa;LEFT JOIN civicrm_contact sccontact ON intake.sector_coordinator_id &#x3d; sccontact.id&#xa;LEFT JOIN civicrm_contact pocontact ON intake.project_officer_id &#x3d; pocontact.id&#xa;LEFT JOIN civicrm_contact projcontact ON proj.projectmanager_id &#x3d; projcontact.id&#xa;LEFT JOIN civicrm_contact_segment customercs ON intake.customer_id &#x3d; customercs.contact_id AND customercs.is_active &#x3d; 1 AND customercs.role_value &#x3d; &#x22;Customer&#x22;&#xa;LEFT JOIN civicrm_segment customersector ON customercs.segment_id &#x3d; customersector.id&#xa;&#xa;WHERE csov.label &#x3c;&#x3e; &#x22;Error&#x22; &#xa;ORDER BY intake.case_id</sql>
     <limit>0</limit>
     <lookup/>
@@ -744,7 +717,7 @@
            </partitioning>
       <schema/>
       <table>dim_country_project_officer</table>
-      <connection>Local PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -799,7 +772,7 @@
            </partitioning>
       <schema/>
       <table>dim_project</table>
-      <connection>Test PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -1066,7 +1039,7 @@
            </partitioning>
       <schema/>
       <table>dim_client_representative</table>
-      <connection>Local PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -1121,7 +1094,7 @@
            </partitioning>
       <schema/>
       <table>dim_client_sector_coordinator</table>
-      <connection>Local PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
@@ -1176,7 +1149,7 @@
            </partitioning>
       <schema/>
       <table>dim_sponsor</table>
-      <connection>Local PUM Datawarehouse</connection>
+      <connection>PUM Datawarehouse</connection>
       <commit>100</commit>
       <update>Y</update>
       <fields>
