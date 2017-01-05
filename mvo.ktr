@@ -2,7 +2,7 @@
 <transformation>
   <info>
     <name>mvo</name>
-    <description>Transformatie voor MVO vragen</description>
+    <description>MVO Cube</description>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
@@ -77,13 +77,13 @@
   </notepads>
   <connection>
     <name>PUM CiviCRM Database</name>
-    <server>132.160.150.21</server>
+    <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>civicrm</database>
     <port>3306</port>
-    <username>sa-connect-db</username>
-    <password>Encrypted 2be98afc86aa7f2e4a81cbd658a80aec9</password>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4a600bd61d296addb</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -104,13 +104,13 @@
   </connection>
   <connection>
     <name>PUM Datawarehouse</name>
-    <server>132.160.150.28</server>
+    <server>pentaho.edeveloper.nl</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>datawarehouse</database>
+    <database>civicrm_datawarehouse</database>
     <port>3306</port>
-    <username>pentaho</username>
-    <password>Encrypted 2be98afc86aa78281a54aaf7e8a95a7ce</password>
+    <username>erik</username>
+    <password>Encrypted 2be98afc86aa7a285b80ab97fcc96fe8a</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -123,7 +123,7 @@
       <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
@@ -131,13 +131,13 @@
   </connection>
   <connection>
     <name>PUM Drupal Database</name>
-    <server>132.160.150.21</server>
+    <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>drupal</database>
     <port>3306</port>
-    <username>sa-connect-db</username>
-    <password>Encrypted 2be98afc86aa7f2e4a81cbd658a80aec9</password>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4a600bd61d296addb</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -386,6 +386,13 @@
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>Integer</type><text>93</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>&#x23;&#x3b;-&#x23;</mask></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>component_id</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>Integer</type><text>83</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>&#x23;&#x3b;-&#x23;</mask></value>   </condition>
   </conditions>
  </condition>
     </compare>

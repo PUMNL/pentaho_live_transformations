@@ -77,13 +77,13 @@
   </notepads>
   <connection>
     <name>PUM CiviCRM connection</name>
-    <server>132.160.150.21</server>
+    <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>civicrm</database>
     <port>3306</port>
-    <username>sa-connect-db</username>
-    <password>Encrypted 2be98afc86aa7f2e4a81cbd658a80aec9</password>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4a600bd61d296addb</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -104,13 +104,13 @@
   </connection>
   <connection>
     <name>PUM Datawarehouse</name>
-    <server>132.160.150.28</server>
+    <server>pentaho.edeveloper.nl</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>datawarehouse</database>
+    <database>civicrm_datawarehouse</database>
     <port>3306</port>
-    <username>pentaho</username>
-    <password>Encrypted 2be98afc86aa78281a54aaf7e8a95a7ce</password>
+    <username>erik</username>
+    <password>Encrypted 2be98afc86aa7a285b80ab97fcc96fe8a</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -130,8 +130,6 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Intake Data</from><to>Map NULL</to><enabled>Y</enabled> </hop>
-  <hop> <from>Map NULL</from><to>Project Dimension</to><enabled>Y</enabled> </hop>
   <hop> <from>Project Dimension</from><to>Remove Project Data</to><enabled>Y</enabled> </hop>
   <hop> <from>Remove Project Data</from><to>Client Dimension</to><enabled>Y</enabled> </hop>
   <hop> <from>Client Dimension</from><to>Remove Client Data</to><enabled>Y</enabled> </hop>
@@ -150,6 +148,9 @@
   <hop> <from>Remove Sponsor Data</from><to>Case Dimension</to><enabled>Y</enabled> </hop>
   <hop> <from>Case Dimension</from><to>Remove Case Data</to><enabled>Y</enabled> </hop>
   <hop> <from>Remove Case Data</from><to>Add Intake Fact</to><enabled>Y</enabled> </hop>
+  <hop> <from>Intake Data</from><to>Calc Doorloop Days</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calc Doorloop Days</from><to>Map NULL</to><enabled>Y</enabled> </hop>
+  <hop> <from>Map NULL</from><to>Project Dimension</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Intake Fact</name>
@@ -184,7 +185,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1024</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -239,7 +240,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>96</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -294,7 +295,152 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>96</xloc>
-      <yloc>160</yloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calc Doorloop Days</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>submit_rep</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_assess_rep</field_a>
+<field_b>date_request_submitted</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>rep_prof</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_assess_prof</field_a>
+<field_b>date_assess_rep</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>submit_prof</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_assess_prof</field_a>
+<field_b>date_request_submitted</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>customer_submit</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_request_submitted</field_a>
+<field_b>date_customer_created</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>prof_first_main</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_first_main</field_a>
+<field_b>date_assess_prof</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>first_main_expert</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_expert_reacted</field_a>
+<field_b>date_first_main</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>expert_cv</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_cv_sent</field_a>
+<field_b>date_expert_reacted</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>cv_approved</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_cust_approves_expert</field_a>
+<field_b>date_cv_sent</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>approved_logistics</field_name>
+<calc_type>DATE_DIFF</calc_type>
+<field_a>date_start_logistics</field_a>
+<field_b>date_cust_approves_expert</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>224</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -374,7 +520,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>752</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -458,8 +604,8 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>624</xloc>
-      <yloc>48</yloc>
+      <xloc>400</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -476,7 +622,7 @@
            <schema_name/>
            </partitioning>
     <connection>PUM CiviCRM connection</connection>
-    <sql>SELECT &#xa;intake.case_id AS case_id,&#xa;csov.label AS case_status,&#xa;CAST&#x28;DATE_FORMAT&#x28;intake.date_submission, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_submission_tk,&#xa;intake.assess_rep_customer AS assess_rep_customer,&#xa;intake.assess_sc_customer AS assess_sc_customer,&#xa;intake.assess_cc_customer AS assess_cc_customer,&#xa;intake.assess_anamon_customer AS assess_anamon_customer,&#xa;intake.case_subject AS case_subject,&#xa;intake.customer_id AS customer_id,&#xa;intake.customer_name AS customer_name,&#xa;custadr.city AS customer_city,&#xa;intake.customer_country_name AS customer_country_name,&#xa;custregion.name AS customer_worldregion,&#xa;custdata.what_is_the_operational_model_of_105 AS customer_operational_model,&#xa;cdov.label AS customer_legal_form,&#xa;customersector.label AS customer_sector,&#xa;intake.representative_id AS representative_id,&#xa;intake.representative_name AS representative_name,&#xa;intake.anamon_id AS anamon_id,&#xa;anacontact.display_name AS anamon_name,&#xa;intake.country_coordinator_id AS country_coordinator_id,&#xa;cccontact.display_name AS country_coordinator_name,&#xa;intake.sector_coordinator_id AS sector_coordinator_id,&#xa;sccontact.display_name AS sector_coordinator_name,&#xa;intake.project_officer_id AS project_officer_id,&#xa;pocontact.display_name AS project_officer_name,&#xa;proj.id AS project_id,&#xa;proj.title AS project_name,&#xa;proj.projectmanager_id AS projectmanager_id,&#xa;projcontact.display_name AS projectmanager_name,&#xa;sponsor.id AS sponsor_id,&#xa;sponsor.display_name AS sponsor_name&#xa;&#xa;FROM pum_project_intake_view intake&#xa;LEFT JOIN civicrm_case_project cp ON intake.case_id &#x3d; cp.case_id&#xa;LEFT JOIN civicrm_project proj ON cp.project_id &#x3d; proj.id&#xa;LEFT JOIN civicrm_donor_link  donor ON intake.case_id &#x3d; entity_id AND donor.entity &#x3d; &#x22;Case&#x22; AND donor.is_fa_donor &#x3d; 1 AND donor.is_active &#x3d; 1&#xa;LEFT JOIN civicrm_contribution donation ON donor.donation_entity_id &#x3d; donation.id AND donation.is_test &#x3d; 0&#xa;LEFT JOIN civicrm_contact sponsor ON donation.contact_id &#x3d; sponsor.id&#xa;LEFT JOIN civicrm_option_value csov ON intake.case_status_id &#x3d; csov.value AND csov.option_group_id &#x3d; 28&#xa;LEFT JOIN civicrm_value_customer_data_18 custdata ON intake.customer_id &#x3d; custdata.entity_id&#xa;LEFT JOIN civicrm_option_value cdov ON custdata.legal_form_of_the_organisation_82 &#x3d; cdov.value AND cdov.option_group_id &#x3d; 109&#xa;LEFT JOIN civicrm_address custadr ON intake.customer_id &#x3d; custadr.contact_id AND is_primary &#x3d; 1&#xa;LEFT JOIN civicrm_country custcountry ON custadr.country_id &#x3d; custcountry.id&#xa;LEFT JOIN civicrm_worldregion custregion ON custcountry.region_id &#x3d; custregion.id&#xa;LEFT JOIN civicrm_contact cccontact ON intake.country_coordinator_id &#x3d; cccontact.id&#xa;LEFT JOIN civicrm_contact anacontact ON intake.anamon_id &#x3d; anacontact.id&#xa;LEFT JOIN civicrm_contact sccontact ON intake.sector_coordinator_id &#x3d; sccontact.id&#xa;LEFT JOIN civicrm_contact pocontact ON intake.project_officer_id &#x3d; pocontact.id&#xa;LEFT JOIN civicrm_contact projcontact ON proj.projectmanager_id &#x3d; projcontact.id&#xa;LEFT JOIN civicrm_contact_segment customercs ON intake.customer_id &#x3d; customercs.contact_id AND customercs.is_active &#x3d; 1 AND customercs.role_value &#x3d; &#x22;Customer&#x22;&#xa;LEFT JOIN civicrm_segment customersector ON customercs.segment_id &#x3d; customersector.id&#xa;&#xa;WHERE csov.label &#x3c;&#x3e; &#x22;Error&#x22; &#xa;ORDER BY intake.case_id</sql>
+    <sql>SELECT &#xa;intake.case_id AS case_id,&#xa;csov.label AS case_status,&#xa;CAST&#x28;DATE_FORMAT&#x28;intake.date_submission, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_submission_tk,&#xa;intake.assess_rep_customer AS assess_rep_customer,&#xa;intake.assess_sc_customer AS assess_sc_customer,&#xa;intake.assess_cc_customer AS assess_cc_customer,&#xa;intake.assess_anamon_customer AS assess_anamon_customer,&#xa;intake.case_subject AS case_subject,&#xa;intake.customer_id AS customer_id,&#xa;intake.customer_name AS customer_name,&#xa;custadr.city AS customer_city,&#xa;intake.customer_country_name AS customer_country_name,&#xa;custregion.name AS customer_worldregion,&#xa;custdata.what_is_the_operational_model_of_105 AS customer_operational_model,&#xa;cdov.label AS customer_legal_form,&#xa;customersector.label AS customer_sector,&#xa;intake.representative_id AS representative_id,&#xa;intake.representative_name AS representative_name,&#xa;intake.anamon_id AS anamon_id,&#xa;anacontact.display_name AS anamon_name,&#xa;intake.country_coordinator_id AS country_coordinator_id,&#xa;cccontact.display_name AS country_coordinator_name,&#xa;intake.sector_coordinator_id AS sector_coordinator_id,&#xa;sccontact.display_name AS sector_coordinator_name,&#xa;intake.project_officer_id AS project_officer_id,&#xa;pocontact.display_name AS project_officer_name,&#xa;proj.id AS project_id,&#xa;proj.title AS project_name,&#xa;proj.projectmanager_id AS projectmanager_id,&#xa;projcontact.display_name AS projectmanager_name,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_customer_created, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_customer_created_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_request_submitted, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_request_submitted_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_assess_rep, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_assess_rep_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_assess_prof, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_assess_prof_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_expert_added, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_expert_added_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_expert_reacted, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_expert_reacted_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_cv_sent, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_cv_sent_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_cust_approves_expert, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_customer_approves_expert_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_first_main, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_first_main_tk,&#xa;CAST&#x28;DATE_FORMAT&#x28;proj.date_start_logistics, &#x22;&#x25;Y&#x25;m&#x25;d&#x22;&#x29; AS unsigned&#x29; AS date_start_logistics_tk,&#xa;sponsor.id AS sponsor_id,&#xa;sponsor.display_name AS sponsor_name,&#xa;proj.date_request_submitted,&#xa;proj.date_assess_rep,&#xa;proj.date_customer_created,&#xa;proj.date_assess_prof,&#xa;proj.date_expert_added,&#xa;proj.date_expert_reacted,&#xa;proj.date_cv_sent,&#xa;proj.date_cust_approves_expert,&#xa;proj.date_first_main,&#xa;proj.date_start_logistics&#xa;&#xa;FROM pum_project_intake_view intake&#xa;LEFT JOIN civicrm_case_project cp ON intake.case_id &#x3d; cp.case_id&#xa;LEFT JOIN civicrm_project proj ON cp.project_id &#x3d; proj.id&#xa;LEFT JOIN civicrm_donor_link  donor ON intake.case_id &#x3d; entity_id AND donor.entity &#x3d; &#x22;Case&#x22; AND donor.is_fa_donor &#x3d; 1 AND donor.is_active &#x3d; 1&#xa;LEFT JOIN civicrm_contribution donation ON donor.donation_entity_id &#x3d; donation.id AND donation.is_test &#x3d; 0&#xa;LEFT JOIN civicrm_contact sponsor ON donation.contact_id &#x3d; sponsor.id&#xa;LEFT JOIN civicrm_option_value csov ON intake.case_status_id &#x3d; csov.value AND csov.option_group_id &#x3d; 28&#xa;LEFT JOIN civicrm_value_customer_data_18 custdata ON intake.customer_id &#x3d; custdata.entity_id&#xa;LEFT JOIN civicrm_option_value cdov ON custdata.legal_form_of_the_organisation_82 &#x3d; cdov.value AND cdov.option_group_id &#x3d; 109&#xa;LEFT JOIN civicrm_address custadr ON intake.customer_id &#x3d; custadr.contact_id AND is_primary &#x3d; 1&#xa;LEFT JOIN civicrm_country custcountry ON custadr.country_id &#x3d; custcountry.id&#xa;LEFT JOIN civicrm_worldregion custregion ON custcountry.region_id &#x3d; custregion.id&#xa;LEFT JOIN civicrm_contact cccontact ON intake.country_coordinator_id &#x3d; cccontact.id&#xa;LEFT JOIN civicrm_contact anacontact ON intake.anamon_id &#x3d; anacontact.id&#xa;LEFT JOIN civicrm_contact sccontact ON intake.sector_coordinator_id &#x3d; sccontact.id&#xa;LEFT JOIN civicrm_contact pocontact ON intake.project_officer_id &#x3d; pocontact.id&#xa;LEFT JOIN civicrm_contact projcontact ON proj.projectmanager_id &#x3d; projcontact.id&#xa;LEFT JOIN civicrm_contact_segment customercs ON intake.customer_id &#x3d; customercs.contact_id AND customercs.is_active &#x3d; 1 AND customercs.role_value &#x3d; &#x22;Customer&#x22;&#xa;LEFT JOIN civicrm_segment customersector ON customercs.segment_id &#x3d; customersector.id&#xa;&#xa;WHERE csov.label &#x3c;&#x3e; &#x22;Error&#x22;&#xa;ORDER BY intake.case_id</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -695,10 +841,130 @@
         <mask/>
         <set_empty_string>Y</set_empty_string>
         </field>
+      <field>
+        <name>date_submission_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_customer_created_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_request_submitted_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_assess_rep_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_assess_prof_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_expert_added_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_cv_sent_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_customer_approves_expert_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_first_main_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_start_logistics_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>date_expert_reacted_tk</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>submit_rep</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>rep_prof</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>submit_prof</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>customer_submit</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>prof_first_main</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>first_main_expert</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>expert_cv</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>cv_approved</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>approved_logistics</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>192</xloc>
+      <xloc>352</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
@@ -753,8 +1019,8 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>656</xloc>
-      <yloc>160</yloc>
+      <xloc>688</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -800,6 +1066,51 @@
           <lookup>ProjectManagerID</lookup>
           <update>Punch through</update>
         </field>
+        <field>
+          <name>customer_submit</name>
+          <lookup>NoDaysCustomerSubmit</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>submit_rep</name>
+          <lookup>NoDaysSubmitRep</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>rep_prof</name>
+          <lookup>NoDaysRepProf</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>submit_prof</name>
+          <lookup>NoDaysSubmitProf</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>prof_first_main</name>
+          <lookup>NoDaysProfFirstMain</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>first_main_expert</name>
+          <lookup>NoDaysFirstMainExpert</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>expert_cv</name>
+          <lookup>NoDaysExpertCv</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>cv_approved</name>
+          <lookup>NoDaysCvApproved</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>approved_logistics</name>
+          <lookup>NoDaysApprovedLogistics</lookup>
+          <update>Punch through</update>
+        </field>
         <return>
           <name>ProjectIDTK</name>
           <rename/>
@@ -818,8 +1129,8 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>48</yloc>
+      <xloc>96</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -840,7 +1151,7 @@
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>256</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -860,8 +1171,8 @@
       <remove>        <name>country_coordinator_name</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>224</xloc>
-      <yloc>160</yloc>
+      <xloc>256</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -887,7 +1198,7 @@
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>896</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -913,8 +1224,8 @@
       </remove>      <remove>        <name>customer_worldregion</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
-      <yloc>48</yloc>
+      <xloc>528</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -934,8 +1245,8 @@
       <remove>        <name>project_officer_name</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>784</xloc>
-      <yloc>160</yloc>
+      <xloc>816</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -955,10 +1266,29 @@
       <remove>        <name>project_name</name>
       </remove>      <remove>        <name>projectmanager_name</name>
       </remove>      <remove>        <name>projectmanager_id</name>
+      </remove>      <remove>        <name>date_assess_prof</name>
+      </remove>      <remove>        <name>date_assess_rep</name>
+      </remove>      <remove>        <name>date_cust_approves_expert</name>
+      </remove>      <remove>        <name>date_customer_created</name>
+      </remove>      <remove>        <name>date_cv_sent</name>
+      </remove>      <remove>        <name>date_expert_added</name>
+      </remove>      <remove>        <name>date_expert_reacted</name>
+      </remove>      <remove>        <name>date_first_main</name>
+      </remove>      <remove>        <name>date_request_submitted</name>
+      </remove>      <remove>        <name>date_start_logistics</name>
+      </remove>      <remove>        <name>approved_logistics</name>
+      </remove>      <remove>        <name>customer_submit</name>
+      </remove>      <remove>        <name>cv_approved</name>
+      </remove>      <remove>        <name>expert_cv</name>
+      </remove>      <remove>        <name>first_main_expert</name>
+      </remove>      <remove>        <name>prof_first_main</name>
+      </remove>      <remove>        <name>rep_prof</name>
+      </remove>      <remove>        <name>submit_prof</name>
+      </remove>      <remove>        <name>submit_rep</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>48</yloc>
+      <xloc>256</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -978,8 +1308,8 @@
       <remove>        <name>representative_name</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1040</xloc>
-      <yloc>48</yloc>
+      <xloc>800</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -999,8 +1329,8 @@
       <remove>        <name>sector_coordinator_name</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>512</xloc>
-      <yloc>160</yloc>
+      <xloc>544</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1021,7 +1351,7 @@
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>592</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1075,8 +1405,8 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>896</xloc>
-      <yloc>48</yloc>
+      <xloc>656</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1130,8 +1460,8 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>160</yloc>
+      <xloc>416</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1186,7 +1516,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>432</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

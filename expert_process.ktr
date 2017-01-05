@@ -77,13 +77,13 @@
   </notepads>
   <connection>
     <name>PUM CiviCRM connection</name>
-    <server>132.160.150.21</server>
+    <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>civicrm</database>
     <port>3306</port>
-    <username>sa-connect-db</username>
-    <password>Encrypted 2be98afc86aa7f2e4a81cbd658a80aec9</password>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4a600bd61d296addb</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -104,13 +104,13 @@
   </connection>
   <connection>
     <name>PUM Datawarehouse</name>
-    <server>132.160.150.28</server>
+    <server>pentaho.edeveloper.nl</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>datawarehouse</database>
+    <database>civicrm_datawarehouse</database>
     <port>3306</port>
-    <username>pentaho</username>
-    <password>Encrypted 2be98afc86aa78281a54aaf7e8a95a7ce</password>
+    <username>erik</username>
+    <password>Encrypted 2be98afc86aa7a285b80ab97fcc96fe8a</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -868,6 +868,7 @@
       </remove>      <remove>        <name>expert_status</name>
       </remove>      <remove>        <name>expert_sector_coordinator_name</name>
       </remove>      <remove>        <name>expert_sector_coordinator_id</name>
+      </remove>      <remove>        <name>case_id_1</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>528</xloc>
