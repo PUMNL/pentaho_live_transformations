@@ -157,26 +157,31 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get Advice Debriefing Submissions</from><to>Map NULL</to><enabled>Y</enabled> </hop>
-  <hop> <from>Map NULL</from><to>Get CaseID</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get CaseID</from><to>Add componentIDs</to><enabled>Y</enabled> </hop>
   <hop> <from>Add componentIDs</from><to>Get Probleemstelling</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Probleemstelling</from><to>Get Bijstellen</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Bijstellen</from><to>Bijstellen is 1&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Bijstellen is 1&#x3f;</from><to>Nvt</to><enabled>Y</enabled> </hop>
-  <hop> <from>Bijstellen is 1&#x3f;</from><to>Andere</to><enabled>Y</enabled> </hop>
-  <hop> <from>Nvt</from><to>Get Doelstelling</to><enabled>Y</enabled> </hop>
   <hop> <from>Andere</from><to>Get Doelstelling</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Doelstelling</from><to>Get FinMngmnt</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get FinMngmnt</from><to>Get Organizing</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Organizing</from><to>Get Marketing</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Marketing</from><to>Get Buyers</to><enabled>Y</enabled> </hop>
+  <hop> <from>Bijstellen is 1&#x3f;</from><to>Andere</to><enabled>Y</enabled> </hop>
+  <hop> <from>Bijstellen is 1&#x3f;</from><to>Nvt</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Advice Debriefing Submissions</from><to>Split civicrm_data</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Bijstellen</from><to>Bijstellen is 1&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Buyers</from><to>Get Employees</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Employees</from><to>Get Technology</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Technology</from><to>Get Efficiency</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Efficiency</from><to>Get Quality</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Quality</from><to>Get Development</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get CaseID</from><to>Add componentIDs</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Development</from><to>Update Case Dimension</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Doelstelling</from><to>Get FinMngmnt</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Efficiency</from><to>Get Quality</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Employees</from><to>Get Technology</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get FinMngmnt</from><to>Get Organizing</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Marketing</from><to>Get Buyers</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Organizing</from><to>Get Marketing</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Probleemstelling</from><to>Get Bijstellen</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Quality</from><to>Get Development</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Technology</from><to>Get Efficiency</to><enabled>Y</enabled> </hop>
+  <hop> <from>Map NULL</from><to>Get CaseID</to><enabled>Y</enabled> </hop>
+  <hop> <from>Nail Id</from><to>Remove nail id</to><enabled>Y</enabled> </hop>
+  <hop> <from>Nvt</from><to>Get Doelstelling</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove nail id</from><to>Map NULL</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove split values</from><to>Nail Id</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split civicrm_data</from><to>Split values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split values</from><to>Remove split values</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add componentIDs</name>
@@ -337,8 +342,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>608</xloc>
-      <yloc>32</yloc>
+      <xloc>336</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -370,8 +375,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1152</xloc>
-      <yloc>112</yloc>
+      <xloc>896</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -399,8 +404,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1040</xloc>
-      <yloc>32</yloc>
+      <xloc>768</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -417,7 +422,7 @@
            <schema_name/>
            </partitioning>
     <connection>PUM Drupal Database</connection>
-    <sql>SELECT &#xa;node.title AS webform_name,&#xa;ws.uid AS drupal_user_id, &#xa;wsu.name AS drupal_user, &#xa;ws.sid AS unique_submission_id,&#xa;ws.serial AS drupal_submission_id,&#xa;CAST&#x28;DATE_FORMAT&#x28;FROM_UNIXTIME&#x28;ws.submitted&#x29;, &#x22;&#x25;Y&#x25;m&#x25;d&#x25;H&#x25;i&#x25;s&#x22;&#x29; AS unsigned&#x29; AS drupal_submitted_date_tk,&#xa;civi.activity_id&#xa;&#xa;FROM webform_submissions ws&#xa;JOIN node ON ws.nid &#x3d; node.nid&#xa;JOIN webform_civicrm_submissions civi ON ws.sid &#x3d; civi.sid&#xa;JOIN users wsu ON ws.uid &#x3d; wsu.uid&#xa;&#xa;WHERE ws.nid IN &#x28;728, 758, 765&#x29;&#xa;</sql>
+    <sql>SELECT &#xa;node.title AS webform_name,&#xa;ws.uid AS drupal_user_id, &#xa;wsu.name AS drupal_user, &#xa;ws.sid AS unique_submission_id,&#xa;ws.serial AS drupal_submission_id,&#xa;CAST&#x28;DATE_FORMAT&#x28;FROM_UNIXTIME&#x28;ws.submitted&#x29;, &#x22;&#x25;Y&#x25;m&#x25;d&#x25;H&#x25;i&#x25;s&#x22;&#x29; AS unsigned&#x29; AS drupal_submitted_date_tk,&#xa;civi.civicrm_data&#xa;&#xa;FROM webform_submissions ws&#xa;JOIN node ON ws.nid &#x3d; node.nid&#xa;JOIN webform_civicrm_submissions civi ON ws.sid &#x3d; civi.sid&#xa;JOIN users wsu ON ws.uid &#x3d; wsu.uid&#xa;&#xa;WHERE ws.nid IN &#x28;728, 758, 765&#x29;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -425,8 +430,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>112</xloc>
-      <yloc>32</yloc>
+      <xloc>160</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -473,8 +478,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>912</xloc>
-      <yloc>32</yloc>
+      <xloc>640</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -521,8 +526,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>240</yloc>
+      <xloc>384</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -563,8 +568,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>448</xloc>
-      <yloc>32</yloc>
+      <xloc>208</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -611,8 +616,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1088</xloc>
-      <yloc>240</yloc>
+      <xloc>1056</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -659,8 +664,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1312</xloc>
-      <yloc>32</yloc>
+      <xloc>1040</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -707,8 +712,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>848</xloc>
-      <yloc>240</yloc>
+      <xloc>800</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -755,8 +760,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
-      <yloc>240</yloc>
+      <xloc>512</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -803,8 +808,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>112</xloc>
-      <yloc>240</yloc>
+      <xloc>1216</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -851,8 +856,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>352</xloc>
-      <yloc>240</yloc>
+      <xloc>240</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -899,8 +904,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
-      <yloc>240</yloc>
+      <xloc>96</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -947,8 +952,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
-      <yloc>32</yloc>
+      <xloc>496</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -995,8 +1000,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>960</xloc>
-      <yloc>240</yloc>
+      <xloc>928</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1043,8 +1048,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>240</yloc>
+      <xloc>656</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1113,8 +1118,56 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>304</xloc>
-      <yloc>32</yloc>
+      <xloc>96</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Nail Id</name>
+    <type>FieldSplitter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>values_value</splitfield>
+   <delimiter>&#x22;</delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>values_eerste</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>activity_id</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>832</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1146,8 +1199,175 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1152</xloc>
-      <yloc>32</yloc>
+      <xloc>896</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Remove nail id</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>values_eerste</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>992</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Remove split values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>eerste</name>
+      </remove>      <remove>        <name>data_type</name>
+      </remove>      <remove>        <name>data_eerste</name>
+      </remove>      <remove>        <name>data_derde</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>672</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Split civicrm_data</name>
+    <type>FieldSplitter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>civicrm_data</splitfield>
+   <delimiter>&#x7b;</delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>data_eerste</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>data_type</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>data_derde</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>data_values</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>368</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Split values</name>
+    <type>FieldSplitter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>data_values</splitfield>
+   <delimiter>&#x3b;</delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>eerste</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>values_value</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1233,8 +1453,8 @@
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1248</xloc>
-      <yloc>240</yloc>
+      <xloc>1216</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
